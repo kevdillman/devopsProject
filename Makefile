@@ -1,5 +1,8 @@
 # Decompressor Build
 
+.PHONY: all
+all : decompressor
+
 decompressor : decompressor.o
 	g++ -Wall --std=c++17 decompressor.cpp -larchive -o decompressor
 
