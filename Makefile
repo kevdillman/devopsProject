@@ -5,3 +5,7 @@ decompressor : decompressor.o
 
 decompressor.o : decompressor.cpp
 	g++ -c decompressor.cpp
+
+.PHONY: clean
+clean :
+	rm -f decompressor.o decompressor
