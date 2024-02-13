@@ -4,10 +4,10 @@
 all : decompressor
 
 decompressor : decompressor.o
-	g++ -Wall --std=c++17 decompressor.cpp -larchive -o decompressor
+	g++ -Wall --std=c++17 decompressor.cpp -larchive -O3 -o decompressor
 
 decompressor.o : decompressor.cpp
-	g++ -c decompressor.cpp
+	g++ -c -O3 decompressor.cpp
 
 .PHONY: run
 run : decompressor
