@@ -13,6 +13,12 @@ decompressor.o : decompressor.cpp
 run : decompressor
 	./decompressor ./demo.zip
 
+.PHONY: check
+check : decompressor
+	./decompressor ./demo.zip | tee ./compare.cpp
+	diff $(TEST)./decompressor.cpp $(TEST)./compare.cpp
+	rm -f compare.cpp
+
 .PHONY: clean
 clean :
 	rm -f decompressor.o decompressor
