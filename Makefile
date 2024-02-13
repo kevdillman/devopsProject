@@ -9,6 +9,10 @@ decompressor : decompressor.o
 decompressor.o : decompressor.cpp
 	g++ -c decompressor.cpp
 
+.PHONY: run
+run : decompressor
+	./decompressor ./demo.zip
+
 .PHONY: clean
 clean :
 	rm -f decompressor.o decompressor
