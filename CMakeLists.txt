@@ -12,3 +12,12 @@ target_compile_features(decompressor PRIVATE cxx_std_17)
 # libarchive
 find_package(LibArchive REQUIRED)
 target_link_libraries(decompressor PRIVATE LibArchive::LibArchive)
+
+# run
+add_custom_target(run
+    COMMENT "decompressor"
+    COMMAND $<TARGET_FILE:decompressor> <${CMAKE_CURRENT_SOURCE_DIR}/demo.zip
+    DEPENDS decompressor
+    USES_TERMINAL
+    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+)
