@@ -7,6 +7,7 @@ project(decompressor)
 # decompressor
 add_executable(decompressor)
 target_sources(decompressor PRIVATE decompressor.cpp)
+add_compile_options(decompressor PRIVATE -Wall -O3)
 target_compile_features(decompressor PRIVATE cxx_std_17)
 
 # libarchive
