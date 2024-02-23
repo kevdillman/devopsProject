@@ -25,3 +25,19 @@ add_custom_target(run
 
 # install
 install (PROGRAMS $<TARGET_FILE:decompressor> TYPE BIN)
+
+# check - use diff to check output
+find_program(DIFF diff)
+find_package(Git QUIET)
+if (NOT DIFF STREQUAL "DIFF-NOTFOUND")
+   message(STATUS "Check output uses diff: ${Diff}")
+add_custom_target(check COMMAND $<TARGET_FILE:decompressor> <${CMAKE_CURRENT_SOURCE_DIR}/demo.zip | ${DIFF} ${CMAKE_SOURCE_DIR}/decompressor.cpp -)
+elseif(GIT_FOUND)
+    message(STATUS "Check output uses git diff: ${GIT}")
+    add_custom_target(check
+    COMMAND $<TARGET_FILE:decompressor> <${CMAKE_SOURCE_DIR}/demo.zip | ${GIT_EXECUTABLE} diff --no-index
+    ${CMAKE_SOURCE_DIR}/decompressor.cpp -
+    )
+else()
+    message(STATUS "Check output is not implemented due to missing diff utilities")
+endif()
