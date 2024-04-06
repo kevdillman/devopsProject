@@ -36,3 +36,9 @@ jobs:
       #  run:
 
       #  if: runner.os == 'Windows'
+
+      - name: CMake Setup
+        working-directory: build
+        shell: bash
+        run: |
+          cmake .. -G Ninja
