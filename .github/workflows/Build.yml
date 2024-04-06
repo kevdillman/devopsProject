@@ -28,7 +28,7 @@ jobs:
       - name: Setup MacOS packages
         shell: bash
         run:
-          brew install ninja libarchive-dev
+          brew install ninja libarchive
         if: runner.os == 'macOS'
 
       #- name: Setup Windows packages
