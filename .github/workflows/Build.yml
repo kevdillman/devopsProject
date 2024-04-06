@@ -22,13 +22,13 @@ jobs:
       - name: Setup Linux packages
         shell: bash
         run:
-          sudo apt-get install ninja-build
+          sudo apt-get install ninja-build libarchive-dev
         if: runner.os == 'Linux'
 
       - name: Setup MacOS packages
         shell: bash
         run:
-          brew install ninja
+          brew install ninja libarchive-dev
         if: runner.os == 'macOS'
 
       #- name: Setup Windows packages
