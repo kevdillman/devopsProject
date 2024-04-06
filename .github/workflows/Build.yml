@@ -74,5 +74,4 @@ jobs:
         working-directory: build
         shell: bash
         run: |
-          ls -l ../testsuite && ../testsuite/demoUnzip.sh
-        #sudo ctest --verbose
+          sudo ctest --verbose
