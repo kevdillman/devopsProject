@@ -19,8 +19,8 @@ jobs:
         shell: bash
         run: mkdir build
 
-      - name: Setup packages
+      - name: Setup Linux packages
         shell: bash
-        run :
+        run:
           sudo apt-get install ninja-build
-        if: runner.os == 'ubuntu-22.04'
+        if: runner.os == 'Linux'
