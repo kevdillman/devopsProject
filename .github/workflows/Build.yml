@@ -60,3 +60,9 @@ jobs:
         shell: bash
         run: |
           decompressor < ../demo.zip
+
+      - name: Test
+        working-directory: build
+        shell: bash
+        run: |
+          ctest --verbose
