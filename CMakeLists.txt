@@ -11,6 +11,17 @@ add_compile_options(decompressor PRIVATE -Wall -O3)
 target_compile_features(decompressor PRIVATE cxx_std_17)
 
 # libarchive
+# Homebrew ships libarchive keg only, include dirs have to be set manually
+if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+    execute_process(
+        COMMAND brew --prefix libarchive
+        OUTPUT_VARIABLE LIBARCHIVE_PREFIX
+        OUTPUT_STRIP_TRAILING_WHITESPACE
+        COMMAND_ERROR_IS_FATAL ANY
+    )
+    set(LibArchive_INCLUDE_DIR "${LIBARCHIVE_PREFIX}/include")
+endif()
+
 find_package(LibArchive REQUIRED)
 target_link_libraries(decompressor PRIVATE LibArchive::LibArchive)
 
