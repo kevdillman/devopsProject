@@ -18,3 +18,8 @@ jobs:
       - name: Create build directory
         shell: bash
         run: mkdir build
+
+      - name: Setup packages
+        shell: bash
+        run :
+          sudo apt-get install ninja-build
