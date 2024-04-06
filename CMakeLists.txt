@@ -44,8 +44,4 @@ endif()
 
 # testing
 include(CTest)
-
-add_test(NAME testDecompressor1
-        COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/testsuite/tooManyFiles.sh
-        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-)
+add_subdirectory(testsuite)
