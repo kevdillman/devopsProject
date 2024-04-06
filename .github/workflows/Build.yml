@@ -1,5 +1,5 @@
 ---
-name: buildv2
+name: Build
 
 jobs:
   build:
