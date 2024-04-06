@@ -74,4 +74,10 @@ jobs:
         working-directory: build
         shell: bash
         run: |
-          sudo ctest --verbose
+          sudo ctest --verbose | tee TestResults.log
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Test.log
+          path: |
+            build/Testing/Temporary/LastTest.log
+            build/TestResults.log
