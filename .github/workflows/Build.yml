@@ -24,3 +24,15 @@ jobs:
         run:
           sudo apt-get install ninja-build
         if: runner.os == 'Linux'
+
+      - name: Setup MacOS packages
+        shell: bash
+        run:
+          brew install ninja
+        if: runner.os == 'macOS'
+
+      #- name: Setup Windows packages
+      #  shell: bash
+      #  run:
+
+      #  if: runner.os == 'Windows'
