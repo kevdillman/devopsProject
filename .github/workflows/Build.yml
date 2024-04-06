@@ -48,3 +48,9 @@ jobs:
         shell: bash
         run: |
           cmake --build . --config Release --target all
+
+      - name: Install
+        working-directory: build
+        shell: bash
+        run: |
+          cmake --build . --config Release --target install/strip
