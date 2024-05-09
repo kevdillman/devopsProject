@@ -20,3 +20,6 @@ if(CMAKE_SYSTEM_PROCESSOR STREQUAL "aarch64")
 else()
     set(SRCML_SYSTEM_ARCHITECTURE "x86_64")
 endif()
+
+# RPM release, not part of major-minor-patch
+set(CPACK_RPM_PACKAGE_RELEASE 1)
