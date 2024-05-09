@@ -24,3 +24,6 @@ set(CPACK_DEBIAN_PACKAGE_RELEASE 1)
 
 # Debian component package names
 set(CPACK_DEBIAN_CLIENT_PACKAGE_NAME "${CPACK_PACKAGE_NAME}")
+
+# Debian section name
+set(CPACK_DEBIAN_PACKAGE_SECTION utils)
