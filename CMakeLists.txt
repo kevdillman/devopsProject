@@ -35,7 +35,25 @@ add_custom_target(run
 )
 
 # install
-install (TARGETS decompressor)
+install (TARGETS decompressor COMPONENT CLIENT)
+
+# packaging
+include(CPackComponent)
+cpack_add_component(CLIENT
+                    DISPLAY_NAME "decompressor"
+                    DESCRIPTION "Decompresses a single file or compressed directory"
+                    REQUIRED
+                    INSTALL_TYPES CLIENT)
+
+# configure packaging for debian product
+set(CPACK_DEB_COMPONENT_INSTALL ON)
+
+# general package information
+set(CPACK_PACKAGE_NAME "decompressor")
+set(CPACK_PACKAGE_CONTACT "Kevin Dillman")
+
+# strip generated package to reduce size
+set(CPACK_STRIP_FILES ON)
 
 # check - use diff to check output
 find_program(DIFF diff)
@@ -56,3 +74,6 @@ endif()
 # testing
 include(CTest)
 add_subdirectory(testsuite)
+
+# leave after all cpack configuration
+include(CPack)
