@@ -18,3 +18,6 @@ if(CMAKE_SYSTEM_PROCESSOR EQUAL "aarch64")
 else()
     set(DECOMPRESSOR_SYSTEM_ARCHITECTURE "amd64")
 endif()
+
+# Debian release, not part of major-minor-patch
+set(CPACK_DEBIAN_PACKAGE_RELEASE 1)
