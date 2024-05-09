@@ -57,8 +57,11 @@ if(UNIX AND NOT APPLE)
     cmake_host_system_information(RESULT DISTRO QUERY DISTRIB_NAME)
 endif()
 
-# Debian packaging
+# debian packaging
 include(debian.cmake)
+
+# fedora packaging
+include(fedora.cmake)
 
 # check - use diff to check output
 find_program(DIFF diff)
