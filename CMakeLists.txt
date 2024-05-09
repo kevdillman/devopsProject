@@ -55,6 +55,14 @@ set(CPACK_PACKAGE_CONTACT "Kevin Dillman")
 # strip generated package to reduce size
 set(CPACK_STRIP_FILES ON)
 
+# Determine Linux distribution
+if(UNIX AND NOT APPLE)
+    cmake_host_system_information(RESULT DISTRO QUERY DISTRIB_NAME)
+endif()
+
+# Debian packaging
+include(debian.cmake)
+
 # check - use diff to check output
 find_program(DIFF diff)
 find_package(Git QUIET)
