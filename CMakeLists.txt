@@ -35,7 +35,7 @@ add_custom_target(run
 )
 
 # install
-install (PROGRAMS $<TARGET_FILE:decompressor> TYPE BIN)
+install (TARGETS decompressor)
 
 # check - use diff to check output
 find_program(DIFF diff)
