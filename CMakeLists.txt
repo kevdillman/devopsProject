@@ -45,9 +45,6 @@ cpack_add_component(CLIENT
                     REQUIRED
                     INSTALL_TYPES CLIENT)
 
-# configure packaging for debian product
-set(CPACK_DEB_COMPONENT_INSTALL ON)
-
 # general package information
 set(CPACK_PACKAGE_NAME "decompressor")
 set(CPACK_PACKAGE_CONTACT "Kevin Dillman")
