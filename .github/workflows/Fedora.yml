@@ -66,3 +66,14 @@ jobs:
           path: |
             build/Testing/Temporary/LastTest.log
             build/TestResults.log
+
+      - name: Package
+        working-directory: build
+        shell: bash
+        run: |
+          cpack -G RPM
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Installers
+          path: |
+            build/*.rpm
