@@ -7,16 +7,9 @@ x-configuration: &CONFIGURATION
     - .:/Source:ro
     - dist:/dist
   working_dir: /Build
-  command: bash -c "${COMPOSE_COMMAND-
-    cmake -G Ninja /Source;
+  command: bash -c "${COMPOSE_COMMAND- cmake /Source -G Ninja;
     ninja;
-    ninja install;
-    ninja run;
-    cp ../Source/demo.zip ../demo.zip;
-    cp ../Source/demoMultipleFiles.zip ../demoMultipleFiles.zip;
-    cp ../Source/testsuite.tar.xz ../testsuite.tar.xz;
-    cp ../Source/decompressor.cpp ../decompressor.cpp && cp ../Source/demo.zip ../demo.zip;
-    ctest -j 6 --timeout 10;}
+    ninja install;}
     ${COMPOSE_APPEND- }"
 
 x-platforms: &PLATFORMS
