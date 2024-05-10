@@ -28,7 +28,7 @@ target_link_libraries(decompressor PRIVATE LibArchive::LibArchive)
 # run
 add_custom_target(run
     COMMENT "decompressor"
-    COMMAND $<TARGET_FILE:decompressor> <${CMAKE_CURRENT_SOURCE_DIR}/demo.zip
+    COMMAND $<TARGET_FILE:decompressor> <${CMAKE_CURRENT_SOURCE_DIR}/demo.zip > /dev/null 2>&1 > /dev/null
     DEPENDS decompressor
     USES_TERMINAL
     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
