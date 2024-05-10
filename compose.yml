@@ -1,1 +1,42 @@
 # docker compose multi-build file
+volumes:
+  dist:
+
+x-configuration: &CONFIGURATION
+  volumes:
+    - .:/Source:ro
+    - dist:/dist
+  working_dir: /Build
+  command: bash -c "${COMPOSE_COMMAND-
+    cmake -G Ninja /Source;
+    ninja;
+    ninja install;
+    ninja run;
+    cp ../Source/demo.zip ../demo.zip;
+    cp ../Source/demoMultipleFiles.zip ../demoMultipleFiles.zip;
+    cp ../Source/testsuite.tar.xz ../testsuite.tar.xz;
+    cp ../Source/decompressor.cpp ../decompressor.cpp && cp ../Source/demo.zip ../demo.zip;
+    ctest -j 6 --timeout 10;}
+    ${COMPOSE_APPEND- }"
+
+x-platforms: &PLATFORMS
+  platforms:
+    - "linux/amd64"
+    - "linux/arm64"
+
+services:
+
+  ubuntu_24.04:
+    #image: mlcollard/ubuntu:24.04
+    platform: ${PLATFORM}
+    build:
+      context: docker/ubuntu/
+      tags:
+        - "kevdillman/ubuntu:latest"
+        - "kevdillman/ubuntu:24.04"
+      <<: *PLATFORMS
+      args:
+        TAG: "24.04"
+    environment:
+      - PLATFORM=ubuntu_24.04
+    <<: *CONFIGURATION
