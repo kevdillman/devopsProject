@@ -27,6 +27,7 @@ x-platforms: &PLATFORMS
 services:
 
   ubuntu_24.04:
+    image: kevdillman/ubuntu:24.04
     platform: ${PLATFORM}
     build:
       context: docker/ubuntu/
@@ -40,9 +41,12 @@ services:
     <<: *CONFIGURATION
 
   ubuntu_23.10:
+    image: kevdillman/ubuntu:23.10
     platform: ${PLATFORM}
     build:
       context: docker/ubuntu/
+      tags:
+        - "kevdillman/ubuntu:23.10"
       <<: *PLATFORMS
       args:
         TAG: "23.10"
@@ -51,9 +55,12 @@ services:
     <<: *CONFIGURATION
 
   ubuntu_22.04:
+    image: kevdillman/ubuntu:22.04
     platform: ${PLATFORM}
     build:
       context: docker/ubuntu/
+      tags:
+        - "kevdillman/ubuntu:22.04"
       <<: *PLATFORMS
       args:
         TAG: "22.04"
@@ -62,9 +69,12 @@ services:
     <<: *CONFIGURATION
 
   fedora_41:
+    image: kevdillman/fedora:41
     platform: ${PLATFORM}
     build:
       context: docker/fedora/
+      tags:
+        - "kevdillman/fedora:41"
       <<: *PLATFORMS
       args:
         TAG: "41"
@@ -73,9 +83,12 @@ services:
     <<: *CONFIGURATION
 
   fedora_40:
+    image: kevdillman/fedora:40
     platform: ${PLATFORM}
     build:
       context: docker/fedora/
+      tags:
+        - "kevdillman/fedora:40"
       <<: *PLATFORMS
       args:
         TAG: "40"
@@ -84,9 +97,12 @@ services:
     <<: *CONFIGURATION
 
   fedora_39:
+    image: kevdillman/fedora:39
     platform: ${PLATFORM}
     build:
       context: docker/fedora/
+      tags:
+        - "kevdillman/fedora:39"
       <<: *PLATFORMS
       args:
         TAG: "39"
@@ -95,9 +111,12 @@ services:
     <<: *CONFIGURATION
 
   opensuse_15.5:
+    image: kevdillman/opensuse_leap:15.5
     platform: ${PLATFORM}
     build:
       context: docker/openSUSE/
+      tags:
+        - "kevdillman/opensuse_leap:15.5"
       <<: *PLATFORMS
       args:
         TAG: "15.5"
@@ -106,9 +125,12 @@ services:
     <<: *CONFIGURATION
 
   opensuse_15.4:
+    image: kevdillman/opensuse_leap:15.4
     platform: ${PLATFORM}
     build:
       context: docker/openSUSE/
+      tags:
+        - "kevdillman/opensuse_leap:15.4"
       <<: *PLATFORMS
       args:
         TAG: "15.4"
@@ -117,9 +139,12 @@ services:
     <<: *CONFIGURATION
 
   opensuse_15.3:
+    image: kevdillman/opensuse_leap:15.3
     platform: ${PLATFORM}
     build:
       context: docker/openSUSE/
+      tags:
+        - "kevdillman/opensuse_leap:15.3"
       <<: *PLATFORMS
       args:
         TAG: "15.3"
