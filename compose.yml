@@ -71,3 +71,14 @@ services:
     environment:
       - PLATFORM=fedora_41
     <<: *CONFIGURATION
+
+  fedora_40:
+    platform: ${PLATFORM}
+    build:
+      context: docker/fedora/
+      <<: *PLATFORMS
+      args:
+        TAG: "40"
+    environment:
+      - PLATFORM=fedora_40
+    <<: *CONFIGURATION
