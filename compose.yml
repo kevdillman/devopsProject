@@ -115,3 +115,14 @@ services:
     environment:
       - PLATFORM=opensuse_15.4
     <<: *CONFIGURATION
+
+      opensuse_15.3:
+    platform: ${PLATFORM}
+    build:
+      context: docker/openSUSE/
+      <<: *PLATFORMS
+      args:
+        TAG: "15.3"
+    environment:
+      - PLATFORM=opensuse_15.3
+    <<: *CONFIGURATION
