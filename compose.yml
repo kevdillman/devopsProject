@@ -1,0 +1,155 @@
+# docker compose multi-build file
+volumes:
+  dist:
+
+x-configuration: &CONFIGURATION
+  volumes:
+    - .:/Source:ro
+    - dist:/dist
+  working_dir: /Build
+  command: bash -c "${COMPOSE_COMMAND- cmake /Source -G Ninja;
+    ninja;
+    ninja install;}
+    ${COMPOSE_APPEND- }"
+
+x-platforms: &PLATFORMS
+  platforms:
+    - "linux/amd64"
+    - "linux/arm64"
+
+services:
+
+  ubuntu_24.04:
+    image: kevdillman/ubuntu:24.04
+    platform: ${PLATFORM}
+    build:
+      context: docker/ubuntu/
+      tags:
+        - "kevdillman/ubuntu:latest"
+      <<: *PLATFORMS
+      args:
+        TAG: "24.04"
+    environment:
+      - PLATFORM=ubuntu_24.04
+      - PKG=DEB
+    <<: *CONFIGURATION
+
+  ubuntu_23.10:
+    image: kevdillman/ubuntu:23.10
+    platform: ${PLATFORM}
+    build:
+      context: docker/ubuntu/
+      tags:
+        - "kevdillman/ubuntu:23.10"
+      <<: *PLATFORMS
+      args:
+        TAG: "23.10"
+    environment:
+      - PLATFORM=ubuntu_23.10
+      - PKG=DEB
+    <<: *CONFIGURATION
+
+  ubuntu_22.04:
+    image: kevdillman/ubuntu:22.04
+    platform: ${PLATFORM}
+    build:
+      context: docker/ubuntu/
+      tags:
+        - "kevdillman/ubuntu:22.04"
+      <<: *PLATFORMS
+      args:
+        TAG: "22.04"
+    environment:
+      - PLATFORM=ubuntu_22.04
+      - PKG=DEB
+    <<: *CONFIGURATION
+
+  fedora_41:
+    image: kevdillman/fedora:41
+    platform: ${PLATFORM}
+    build:
+      context: docker/fedora/
+      tags:
+        - "kevdillman/fedora:41"
+      <<: *PLATFORMS
+      args:
+        TAG: "41"
+    environment:
+      - PLATFORM=fedora_41
+      - PKG=RPM
+    <<: *CONFIGURATION
+
+  fedora_40:
+    image: kevdillman/fedora:40
+    platform: ${PLATFORM}
+    build:
+      context: docker/fedora/
+      tags:
+        - "kevdillman/fedora:40"
+      <<: *PLATFORMS
+      args:
+        TAG: "40"
+    environment:
+      - PLATFORM=fedora_40
+      - PKG=RPM
+    <<: *CONFIGURATION
+
+  fedora_39:
+    image: kevdillman/fedora:39
+    platform: ${PLATFORM}
+    build:
+      context: docker/fedora/
+      tags:
+        - "kevdillman/fedora:39"
+      <<: *PLATFORMS
+      args:
+        TAG: "39"
+    environment:
+      - PLATFORM=fedora_39
+      - PKG=RPM
+    <<: *CONFIGURATION
+
+  opensuse_15.5:
+    image: kevdillman/opensuse_leap:15.5
+    platform: ${PLATFORM}
+    build:
+      context: docker/openSUSE/
+      tags:
+        - "kevdillman/opensuse_leap:15.5"
+      <<: *PLATFORMS
+      args:
+        TAG: "15.5"
+    environment:
+      - PLATFORM=opensuse_15.5
+      - PKG=RPM
+    <<: *CONFIGURATION
+
+  opensuse_15.4:
+    image: kevdillman/opensuse_leap:15.4
+    platform: ${PLATFORM}
+    build:
+      context: docker/openSUSE/
+      tags:
+        - "kevdillman/opensuse_leap:15.4"
+      <<: *PLATFORMS
+      args:
+        TAG: "15.4"
+    environment:
+      - PLATFORM=opensuse_15.4
+      - PKG=RPM
+    <<: *CONFIGURATION
+
+  opensuse_15.3:
+    image: kevdillman/opensuse_leap:15.3
+    platform: ${PLATFORM}
+    build:
+      context: docker/openSUSE/
+      tags:
+        - "kevdillman/opensuse_leap:15.3"
+      <<: *PLATFORMS
+      args:
+        TAG: "15.3"
+    environment:
+      - PLATFORM=opensuse_15.3
+      - PKG=RPM
+    <<: *CONFIGURATION

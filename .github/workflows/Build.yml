@@ -18,3 +18,71 @@ jobs:
       - name: Create build directory
         shell: bash
         run: mkdir build
+
+      - name: Setup Linux packages
+        shell: bash
+        run:
+          sudo apt-get install ninja-build libarchive-dev
+        if: runner.os == 'Linux'
+
+      - name: Setup MacOS packages
+        shell: bash
+        run:
+          brew install ninja libarchive
+        if: runner.os == 'macOS'
+
+      #- name: Setup Windows packages
+      #  shell: bash
+      #  run:
+
+      #  if: runner.os == 'Windows'
+
+      - name: CMake Setup
+        working-directory: build
+        shell: bash
+        run: |
+          cmake .. -G Ninja
+
+      - name: Build
+        working-directory: build
+        shell: bash
+        run: |
+          cmake --build . --config Release --target all
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Executable-${{matrix.os}}
+          path: |
+            build/decompressor
+
+      - name: Install
+        working-directory: build
+        shell: bash
+        run: |
+          cmake --build . --config Release --target install/strip
+
+      - name: Run
+        working-directory: build
+        shell: bash
+        run: |
+          decompressor < ../demo.zip
+
+      - name: Make script files executable
+        working-directory: build
+        run: |
+          chmod +x ../testsuite/demoUnzip.sh
+          chmod +x ../testsuite/errorOpening.sh
+          chmod +x ../testsuite/multipleFileArchive.sh
+          chmod +x ../testsuite/tarXZDirectory.sh
+          chmod +x ../testsuite/tooManyFiles.sh
+
+      - name: Test
+        working-directory: build
+        shell: bash
+        run: |
+          sudo ctest --verbose | tee TestResults.log
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Test.${{matrix.os}}.log
+          path: |
+            build/Testing/Temporary/LastTest.log
+            build/TestResults.log

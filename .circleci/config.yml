@@ -1,0 +1,78 @@
+# CircleCI configuration
+# CircleCI configuration
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: kevdillman/ubuntu:latest
+    steps:
+      - checkout
+      - run:
+          name: Build Project
+          command: |
+            mkdir build && cd build
+            cmake .. -G Ninja
+            ninja
+      - run:
+          name: Run Local Tests
+          command: |
+            cd build
+            chmod +x ../testsuite/demoUnzip.sh
+            chmod +x ../testsuite/errorOpening.sh
+            chmod +x ../testsuite/multipleFileArchive.sh
+            chmod +x ../testsuite/tarXZDirectory.sh
+            chmod +x ../testsuite/tooManyFiles.sh
+            ctest
+      - run:
+          name: Package
+          command: |
+            mkdir workspace
+            cd build
+            cpack -G DEB
+            cp *.deb ../workspace/
+            cp ../demo.zip ../workspace/
+      - persist_to_workspace:
+          root: workspace
+          paths:
+            - "*.deb"
+            - "*.zip"
+  test:
+    docker:
+      - image: kevdillman/ubuntu:latest
+    steps:
+      - attach_workspace:
+          at: /tmp/workspace
+      - run: ls -lh /tmp/workspace
+      - run:
+          name: Install Packages
+          command: |
+            apt-get install /tmp/workspace/decompressor*.deb
+      - run:
+          name: Run Program
+          command: |
+            decompressor < /tmp/workspace/demo.zip > /dev/null 2>&1 > /dev/null
+      - checkout
+      - run:
+          name: Run Test
+          command: |
+            mkdir build
+            cd build
+            cmake ..
+            chmod +x ../testsuite/demoUnzip.sh
+            chmod +x ../testsuite/errorOpening.sh
+            chmod +x ../testsuite/multipleFileArchive.sh
+            chmod +x ../testsuite/tarXZDirectory.sh
+            chmod +x ../testsuite/tooManyFiles.sh
+            ctest || true
+            find /tmp/workspace -name "*.deb"
+      - store_artifacts:
+          path: /tmp/workspace/
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
