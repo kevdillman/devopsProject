@@ -27,16 +27,25 @@ x-platforms: &PLATFORMS
 services:
 
   ubuntu_24.04:
-    #image: mlcollard/ubuntu:24.04
     platform: ${PLATFORM}
     build:
       context: docker/ubuntu/
       tags:
         - "kevdillman/ubuntu:latest"
-        - "kevdillman/ubuntu:24.04"
       <<: *PLATFORMS
       args:
         TAG: "24.04"
     environment:
       - PLATFORM=ubuntu_24.04
+    <<: *CONFIGURATION
+
+  ubuntu_23.10:
+    platform: ${PLATFORM}
+    build:
+      context: docker/ubuntu/
+      <<: *PLATFORMS
+      args:
+        TAG: "23.10"
+    environment:
+      - PLATFORM=ubuntu_23.10
     <<: *CONFIGURATION
