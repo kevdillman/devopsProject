@@ -93,3 +93,14 @@ services:
     environment:
       - PLATFORM=fedora_39
     <<: *CONFIGURATION
+
+  opensuse_15.5:
+    platform: ${PLATFORM}
+    build:
+      context: docker/openSUSE/
+      <<: *PLATFORMS
+      args:
+        TAG: "15.5"
+    environment:
+      - PLATFORM=opensuse_15.5
+    <<: *CONFIGURATION
