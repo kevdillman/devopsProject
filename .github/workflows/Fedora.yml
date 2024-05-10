@@ -77,3 +77,15 @@ jobs:
           name: Installers
           path: |
             build/*.rpm
+
+  install:
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    container: kevdillman/fedora:41
+    steps:
+
+      - name: Download installers
+        uses: actions/download-artifact@v4
+        with:
+          name: Installers
