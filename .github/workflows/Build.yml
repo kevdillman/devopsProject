@@ -106,7 +106,7 @@ jobs:
     timeout-minutes: 10
     steps:
 
-      - name: Download installers
+      - name: Installers
         uses: actions/download-artifact@v4
         with:
-          name: Debian Installers
+          name: Download Debian Installers

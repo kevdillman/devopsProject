@@ -84,7 +84,7 @@ jobs:
     container: kevdillman/opensuse_leap:15.5
     steps:
 
-      - name: Download openSUSE Installers
+      - name: Installers
         uses: actions/download-artifact@v4
         with:
-          name: Installers
+          name: Download openSUSE Installers

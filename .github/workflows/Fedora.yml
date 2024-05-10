@@ -85,7 +85,7 @@ jobs:
     container: kevdillman/fedora:41
     steps:
 
-      - name: Download Fedora Installers
+      - name: Installers
         uses: actions/download-artifact@v4
         with:
-          name: Installers
+          name: Download Fedora Installers
