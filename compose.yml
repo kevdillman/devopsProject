@@ -60,3 +60,14 @@ services:
     environment:
       - PLATFORM=ubuntu_22.04
     <<: *CONFIGURATION
+
+  fedora_41:
+    platform: ${PLATFORM}
+    build:
+      context: docker/fedora/
+      <<: *PLATFORMS
+      args:
+        TAG: "41"
+    environment:
+      - PLATFORM=fedora_41
+    <<: *CONFIGURATION
