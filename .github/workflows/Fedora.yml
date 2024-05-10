@@ -62,7 +62,7 @@ jobs:
           sudo ctest --verbose | tee TestResults.log
       - uses: actions/upload-artifact@v4
         with:
-          name: Test.${{matrix.os}}.log
+          name: Test.fedora41.log
           path: |
             build/Testing/Temporary/LastTest.log
             build/TestResults.log
@@ -85,7 +85,7 @@ jobs:
     container: kevdillman/fedora:41
     steps:
 
-      - name: Download installers
+      - name: Download Fedora Installers
         uses: actions/download-artifact@v4
         with:
           name: Installers
