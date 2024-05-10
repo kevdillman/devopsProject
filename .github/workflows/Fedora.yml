@@ -33,3 +33,9 @@ jobs:
           name: Executable-fedora41
           path: |
             build/decompressor
+
+      - name: Install
+        working-directory: build
+        shell: bash
+        run: |
+          cmake --build . --config Release --target install/strip
