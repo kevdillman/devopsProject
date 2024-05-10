@@ -63,6 +63,9 @@ include(debian.cmake)
 # fedora packaging
 include(fedora.cmake)
 
+# openSUSE packaging
+include(opensuse.cmake)
+
 # check - use diff to check output
 find_program(DIFF diff)
 find_package(Git QUIET)
