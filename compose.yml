@@ -49,3 +49,14 @@ services:
     environment:
       - PLATFORM=ubuntu_23.10
     <<: *CONFIGURATION
+
+  ubuntu_22.04:
+    platform: ${PLATFORM}
+    build:
+      context: docker/ubuntu/
+      <<: *PLATFORMS
+      args:
+        TAG: "22.04"
+    environment:
+      - PLATFORM=ubuntu_22.04
+    <<: *CONFIGURATION
