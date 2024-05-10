@@ -86,3 +86,16 @@ jobs:
           path: |
             build/Testing/Temporary/LastTest.log
             build/TestResults.log
+
+      - name: Package
+        working-directory: build
+        shell: bash
+        run: |
+          cpack -G DEB
+        if: runner.os == 'Linux'
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Installers
+          path: |
+            build/*.deb
+        if: runner.os == 'Linux'
