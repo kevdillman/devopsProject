@@ -116,7 +116,7 @@ services:
       - PLATFORM=opensuse_15.4
     <<: *CONFIGURATION
 
-      opensuse_15.3:
+  opensuse_15.3:
     platform: ${PLATFORM}
     build:
       context: docker/openSUSE/
