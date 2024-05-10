@@ -7,6 +7,9 @@ endif()
 # Separate packages for each component
 set(CPACK_RPM_COMPONENT_INSTALL ON)
 
+# RPM component package names
+set(CPACK_RPM_CLIENT_PACKAGE_NAME "${CPACK_PACKAGE_NAME}")
+
 # Distribution version
 cmake_host_system_information(RESULT DISTRO_VERSION_ID QUERY DISTRIB_VERSION_ID)
 cmake_host_system_information(RESULT DISTRO_ID QUERY DISTRIB_ID)
