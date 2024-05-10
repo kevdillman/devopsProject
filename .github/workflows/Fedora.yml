@@ -1,0 +1,14 @@
+---
+name: Fedora Build
+
+on: workflow_dispatch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    container: kevdillman/fedora:41
+    steps:
+
+      - name: Checkout Repository
+        uses: actions/checkout@v4
