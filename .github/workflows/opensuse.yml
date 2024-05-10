@@ -58,7 +58,7 @@ jobs:
         working-directory: build
         shell: bash
         run: |
-          sudo ctest --verbose | tee TestResults.log
+          ctest --verbose | tee TestResults.log
       - uses: actions/upload-artifact@v4
         with:
           name: Test.openSUSE.log
@@ -84,7 +84,7 @@ jobs:
     container: kevdillman/opensuse_leap:15.5
     steps:
 
-      - name: Download installers
+      - name: Download openSUSE Installers
         uses: actions/download-artifact@v4
         with:
           name: Installers
